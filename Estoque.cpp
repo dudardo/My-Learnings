@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+//Classe Carro
 
+//Terminar metodo main usando os construtores e função de venda.
 class Carro{
     
     int id;
