@@ -4,7 +4,8 @@ using namespace std;
 
 //Classe Carro
 //Terminar metodo main usando os construtores e metodo de venda.
-class Carro{
+class Carro
+{
 
     public:
     int id;
@@ -30,14 +31,18 @@ class Carro{
         this->sell=false;
     }
     
-    void buy(int id)
-    {
+    void buy()
+    {           
         char SN;
         cout<<(!sell)?"\nCarro Disponível!":"\nCarro já vendido!";
-        cout<<"\n O carro já foi vendido?"; cin>>SN;
-        sell=(SN=='S'||SN=='s') ? true : false;
-        
+        if(!sell)
+        {
+            cout<<"\n O carro será comprado agora?(S ou N): "; cin>>SN;
+            sell = (SN=='S' || SN=='s')?true:false;
+        }
+        cout<<"Operação processada.";        
     }
+
 };
 
 vector<Carro> est;
@@ -47,7 +52,7 @@ int main()
     setlocale(LC_ALL, "portuguese");
     int n;
     cout<<"Armazenamento simples para carros, insira os dados dos carros antes de começar.";
-    cout<<"\nHá quantos carros no estoque?(id: 1-N) "; cin>> n;
+    cout<<"\nHá quantos carros no estoque?(id: 1-N): "; cin>> n;
 
     for(int i=0; i<n; i++)
     {
@@ -59,11 +64,19 @@ int main()
 
         est.push_back(Carro(i+1, m ,price));
     }
-    cout<<"Dados preenchidos.";
-    while(bool v=1)
+    cout<<"\nDados preenchidos.";
+    while(1)
     {
-        est.buy(4);//ERRO CRITICO, termina outro dia
-    }
+        int id;
+        cout<<"\nInsira o id do carro a ser comprado: "; cin>>id;
+        est[id-1].buy();
+        int fV=0;
 
+        
+        for(Carro i: est) if(i.sell==0)fV++;
+        if(fV==0)break;
+        cout<< "Faltam vender "<<fV<<" carros.";
+    }
+    cout <<"Não há mais carros no estoque! Finalizando programa...";
     return 0;
 }
