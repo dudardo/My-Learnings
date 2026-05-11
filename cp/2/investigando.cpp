@@ -2,13 +2,29 @@
 using namespace std;
 int main()
 {
-   for(int i = 0; i < n; i++)        // início do subvetor
-    for(int j = i; j < n; j++)    // fim do subvetor
+    int n;
+    cin >> n;
+
+    long long b = 1, a = 0;
+    long long p = 0, ans = 0;
+
+    for(int i = 0; i < n; i++)
     {
-        // subvetor de i até j
-        for(int k = i; k <= j; k++)
-            cout << A[k] << " ";
-        cout << "\n";
+        int b;
+        cin >> b;
+        p += b;
+
+        if(p % 2 == 0)
+        {
+            ans += a; 
+            b++;
+        }
+        else
+        {
+            ans += b;   
+            a++;
+        }
     }
 
+    cout << ans << "\n";
 }
